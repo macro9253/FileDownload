@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>文件下载</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.1/jquery.js"></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+        <div class="show-login-btn"><i class="fas fa-sign-in-alt"></i>欢迎来到文件下载地址</div>       
+    
+  <div class="login-box">
+        <div class="hide-login-btn"><i class="fas fa-times"></i></div>
+         <form  class="login-form" action="/user/login" method="POST">
+          <h1>登陆</h1>
+      <input class="txtb" type="username" name="username" placeholder="账号">
+      <input class="txtb" type="password" name="password" placeholder="密码">
+      <input class="login-btn" type="submit" name="" value="登陆">
+    </form>
+  </div> 
+  <script type="text/javascript">
+  $(".show-login-btn").on("click",function(){
+      $(".login-box").toggleClass("showed");
+  });
+  $(".hide-login-btn").on("click",function(){
+      $(".login-box").toggleClass("showed");
+  });
+  
+  </script>
+</body>
+</html>

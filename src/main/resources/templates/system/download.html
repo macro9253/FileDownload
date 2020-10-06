@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>文件下载</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.2.1/jquery.js"></script>
+    <!-- 引入样式 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.3/vue.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+    <link rel="stylesheet" th:href="@{/css/download.css}"/>
+    <style>
+        .upload-demo {
+            display: inline-block;
+        }
+        .el-upload-list {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>
+        <span class="address">地址：</span>
+        <input type="text" id="address" placeholder="请输入地址"  v-model="path" @keyup.enter="query">
+        <el-button type="primary" @click="query">搜索</el-button>
+        <el-upload  class="upload-demo" :action="action"  :on-preview="handlePreview"  :on-remove="handleRemove" :on-success="handlerSuccess"
+                :before-remove="beforeRemove"  multiple  :limit="3" :on-exceed="handleExceed"  >
+            <el-button  type="primary" @click="uploadFile">点击上传</el-button>
+        </el-upload>
+    </div>
+    <div>
+        <ul class="table-ul" v-html="tableDate">
+        </ul>
+    </div>
+</div>
+<script>
+    function Jump(path) {
+        vm.JumpData(path);
+    }
+    function download(fileName) {
+        vm.download(fileName);
+    }
+    var vm =new Vue({
+        el:"#app",
+        data:{
+            tableDate:"",
+            path:"",
+            action:"/upload?path="
+        },
+        methods:{
+            uploadFile(){
+                var paths = "/upload?path=";
+                var path = "";
+                if(vm.path.charAt(vm.path.length-1) != "/"){
+                    path =  vm.path + "/"
+                }
+
+              vm.action  = paths + path
+            },
+            handlerSuccess(){
+                //重新加载文件
+                vm.JumpData('');
+            },
+            //以下操作可以删除
+            handleRemove(file) {
+                console.log(file);
+            },
+            handlePreview(file) {
+                console.log(file);
+            },
+            handleExceed(files) {
+            },
+            beforeRemove(file) {
+            },
+            download(fileName){
+                var path =vm.path;
+                console.log("path: " + path + "  fileName:" + fileName);
+                if(vm.path.charAt(vm.path.length-1) != "/"){
+                    console.log("path: " + path + "  fileName:" + fileName);
+                    path =  vm.path + "/"
+                }
+                location.href="../../download/file?path=" + path +   fileName;
+
+            },
+            query(){
+              vm.tableDate = "";
+              vm.JumpData('');
+            },
+            JumpData(path){
+               var rootPath = $("#address").val();
+                this.tableDate = "";
+               if(rootPath!= null && rootPath != ""){
+                   if(rootPath.charAt(rootPath.length-1) != "/"){
+                       rootPath = rootPath  + "/";
+                   }
+               }
+
+                $.get("../../" + "download/getTable?path=" + rootPath + path , function(r){
+                            vm.path = r.path;
+                        if(r.list != null && r.list.length > 0){
+                            for (let i = 0; i < r.list.length; i++) {
+                                var btn = "";
+                                var click = "";
+                                //文件夹
+                                if(r.list[i].state == 0){
+                                    click = "onclick=Jump('"+r.list[i].filename+"')";
+                                }else {
+                                    var btnClick =  "onclick=download('"+r.list[i].filename.toString() +"')";
+                                    btn = "<span  class='li-btn login-button' ><button class='login-button'  "+btnClick+">下载</button></span>"
+                                }
+                                vm.tableDate = vm.tableDate + " <li class='table-li' "+click+" >" +
+                                    "<p><img src="+r.list[i].icon+" class="+r.list[i].classs+">" +
+                                    " <p>"+r.list[i].filename+"</p></p> " +
+                                    "<span>"+r.list[i].size+"</span>" +
+                                    btn+
+                                    "</li>"
+                            }
+                        }
+                });
+            }
+        },
+        mounted(){
+            this.JumpData("");
+        }
+    });
+</script>
+</body>
+</html>

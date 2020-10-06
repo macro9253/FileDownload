@@ -1,0 +1,19 @@
+server:
+  port: 8080
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  thymeleaf:
+    cache: false
+    encoding: utf-8
+    prefix: classpath:/templates/
+    mode: HTML
+    suffix: .html
+
+# 配置登陆账号密码 不设置默认: root root
+download:
+  username: admin
+  password: admin
+  name: macro

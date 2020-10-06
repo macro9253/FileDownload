@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>欢迎使用服务器资源下载系统</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <script>
+        $(function () {
+            $('.thymeleaf-aOnClick').click(function () {
+                $('#body-iframe').prop('src',$(this).attr('href'));
+                return false;
+            });
+        })
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" title="logoTitle" href="#">欢迎使用服务器资源下载系统</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li role="presentation">
+                    <a href="#">当前用户：<span class="badge" th:text="${name}"></span></a>
+                </li>
+                <li>
+                    <a href="/logout">
+                        <span class="glyphicon glyphicon-lock"></span>退出登录</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="pageContainer">
+    <div class="pageSidebar">
+        <ul class="nav nav-stacked nav-pills">
+            <li role="presentation">
+                <a href="download" style="color: #000000"  class="thymeleaf-aOnClick" >文件上传下载</a>
+            </li>
+            <li role="presentation">
+                <a href="list" style="color: #000000" class="thymeleaf-aOnClick">添加下载资源(暂时不搞)</a>
+            </li>
+        </ul>
+    </div>
+    <div class="splitter"></div>
+    <div class="pageContent">
+        <iframe id="body-iframe" style="width: 100%;min-height: 100%;" src="home" frameborder="0" class="content-wrapper"></iframe>
+    </div>
+</div>
+<div class="footer">
+    <p class="text-center">
+        2020 &copy; 不学无术(macro) <br/>
+    </p>
+</div>
+</body>
+</html>

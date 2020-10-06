@@ -1,0 +1,76 @@
+p {
+    margin: 0;
+}
+.address {
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+}
+#address {
+    outline-style: none ;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 13px 14px;
+    width: 800px;
+    height: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: "Microsoft soft";
+}
+#address:focus{
+    border-color: #66afe9;
+    outline: 0;
+}
+.table-li {
+    list-style: none;
+    height:40px;
+    line-height:40px;
+    text-align:left;
+    border-bottom: 1px solid #EBEBEB;
+    text-align: center;
+    cursor: pointer;
+}
+.table-li:hover{
+    background-color: #EAEAEA;
+
+}
+
+.table-li > p {
+    float: left;
+    height: 40px;
+
+}
+
+
+.table-li > .li-btn{
+    float: right;
+    margin-right: 5px;
+    list-style: 40px;
+    margin-top: -1px;
+}
+.table-ul {
+    width: 95%;
+}
+.li-file {
+    height: 30px;
+    margin-top: 5px;
+}
+.li-folder {
+    height: 40px;
+}
+.login-button { /* 按钮美化 */
+    width: 80px;
+    height: 34px;
+    border-width: 0px;
+    border-radius: 3px;
+    background: #1E90FF;
+    cursor: pointer;
+    outline: none;
+    font-family: Microsoft YaHei;
+    color: white;
+    font-size: 17px;
+    margin-top: 4px;
+}
+.login-button:hover { /* 鼠标移入按钮范围时改变颜色 */
+    background: #5599FF;
+}
