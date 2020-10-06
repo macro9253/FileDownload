@@ -3,7 +3,7 @@
 > 个人编写的文件管理器
 
 * 支持Win Linux
-* 采用SpringBoot
+* 采用SpringBoot+Thymeleaf+vue+ElementUI 
 
 ```
 原本想着win下载速度太慢，采用linux下载(有些软件采用linux下载贼快)
